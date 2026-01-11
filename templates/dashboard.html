@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <p style="text-align:center; opacity:0.7;">
+        Personal Task Management System • Ardentix Technical Assignment
+    </p>
+
+    <h2>Hi {{ current_user.username }} 👋</h2>
+    <p style="color:#555; margin-bottom:15px;">Here are your tasks</p>
+
+    <form method="POST" action="{{ url_for('add_task') }}">
+        <input type="text" name="title" placeholder="New Task" required>
+        <button type="submit">Add Task</button>
+    </form>
+
+    <form method="GET" style="margin:15px 0; text-align:right;">
+        <select name="sort" onchange="this.form.submit()" style="padding:8px;border-radius:6px;">
+            <option value="new" {% if sort == "new" %}selected{% endif %}>Newest First</option>
+            <option value="old" {% if sort == "old" %}selected{% endif %}>Oldest First</option>
+        </select>
+    </form>
+
+    <div class="task-box">
+        {% for task in tasks %}
+        <div class="task">
+            {{ task.title }}
+            <span>
+                <a href="/edit/{{ task.id }}">Edit</a> |
+                <a href="/delete/{{ task.id }}">Delete</a>
+            </span>
+        </div>
+        {% endfor %}
+    </div>
+
+    <br>
+    <a href="/logout">Logout</a>
+</div>
+
+</body>
+</html>

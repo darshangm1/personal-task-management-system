@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<script>
+function togglePassword() {
+    const pwd = document.getElementById("password");
+    pwd.type = pwd.type === "password" ? "text" : "password";
+}
+</script>
+
+<div class="container">
+    <h2>Login</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="error">
+          {{ messages[0] }}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+
+        <input type="text" name="username" placeholder="Username" required>
+
+        <div class="password-box">
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <span class="toggle" onclick="togglePassword()">👁</span>
+        </div>
+
+        <button type="submit">Login</button>
+
+        <p style="margin-top:10px;">
+            Don't have an account? <a href="/register">Register</a>
+        </p>
+
+    </form>
+</div>
+
+</body>
+</html>

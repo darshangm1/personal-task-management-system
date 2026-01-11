@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Create Account</h2>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="error">
+          {{ messages[0] }}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+
+        <input type="text" name="username" placeholder="Username" required>
+
+        <div class="password-box">
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <span class="toggle" onclick="togglePassword()">👁</span>
+        </div>
+
+        <button type="submit">Register</button>
+
+        <p style="margin-top:10px; text-align:center;">
+            Already have an account? <a href="/login">Login</a>
+        </p>
+    </form>
+</div>
+
+<script>
+function togglePassword() {
+    const pwd = document.getElementById("password");
+    pwd.type = pwd.type === "password" ? "text" : "password";
+}
+</script>
+
+</body>
+</html>
